@@ -37,7 +37,7 @@ def preprocess_and_split(X, y, test_size=0.3, normalize=True, threshold=0.1):
     balanced = False
     while not balanced:
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, stratify=y
-                                                            # , random_state=42
+                                                            , random_state=42
                                                             )
         y_train_series = pd.Series(y_train)
         y_test_series = pd.Series(y_test)
