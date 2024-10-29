@@ -1,3 +1,4 @@
+#%%
 import ucimlrepo as uc
 from sklearn.metrics import classification_report, confusion_matrix, recall_score
 from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_score, KFold

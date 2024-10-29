@@ -158,11 +158,14 @@ def getResults(feature_set, goal, title="", n_folds=5):
     print("\nConfusion Matrix:")
     print(confusion_matrix(y_test_original, y_pred_original))
 
-
+#%%
 # Run analysis for each feature set
 print("FEATURE SET 1\n")
 getResults(feature_set1, encoded_target, title="Feature Set 1", n_folds=5)
+#%%
 print("\nFEATURE SET 2\n")
 getResults(feature_set2, encoded_target, title="Feature Set 2", n_folds=5)
+
+#%%
 print("\nFEATURE SET 3\n")
 getResults(feature_set3, encoded_target, title="Feature Set 3", n_folds=5)
