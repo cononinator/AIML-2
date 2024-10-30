@@ -33,6 +33,7 @@ data_robust_scaled = robust_scaler.fit_transform(data)
 normalizer = Normalizer()
 data_normalized = normalizer.fit_transform(data)
 
+#%%
 # Print results
 print("Min-Max Scaled Data:\n", data_min_max_scaled)
 print("Standard Scaled Data:\n", data_standard_scaled)

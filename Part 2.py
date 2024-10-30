@@ -17,6 +17,11 @@ target = bcwd.data.targets
 # Encode the target variable
 le = LabelEncoder()
 encoded_target = le.fit_transform(target['Diagnosis'])
+# Increase the font sizes
+plt.rc('font', size=12)
+plt.rc('axes', titlesize=16)
+# Adjust the spacing and layout
+plt.subplots_adjust(wspace=0.4, hspace=0.6, top=0.88, bottom=0.12)
 
 # Prepare feature sets
 feature_set1 = feature.iloc[:, :10]  # First 10 features (mean values)
@@ -98,7 +103,7 @@ def getResults(feature_set, goal, title="", n_folds=5):
 
     param_grid = {
         'n_neighbors': list(range(1, 21, 2)),
-        'metric': ['euclidean', 'manhattan', 'minkowski'],
+        'metric': ['euclidean', 'manhattan', 'minkowski', 'chebyshev'],
         'weights': ['uniform', 'distance'],
         'p': [3]
     }
@@ -109,19 +114,21 @@ def getResults(feature_set, goal, title="", n_folds=5):
 
     # Plot GridSearchCV results
     results = grid_search.cv_results_
-    plt.figure(figsize=(15, 10))
+    plt.figure(figsize=(10, 6))
 
     for weight in param_grid['weights']:
         plt.subplot(2, 1, param_grid['weights'].index(weight) + 1)
         for metric in param_grid['metric']:
+            label_extra = ""
             mask = (results['param_weights'] == weight) & (results['param_metric'] == metric)
             if metric == 'minkowski':
                 mask = mask & (results['param_p'] == 3)
+                label_extra = "p=3"
             plt.plot(param_grid['n_neighbors'],
                      results['mean_test_score'][mask],
-                     label=f"{metric}",
-                     linestyle=['-', '-.', '--'][param_grid['metric'].index(metric)],
-                     marker=['o', 's', '^'][param_grid['metric'].index(metric)],
+                     label=f"{metric} {label_extra}",
+                     linestyle=['-', '-.', '--', ':'][param_grid['metric'].index(metric)],
+                     marker=['o', 's', '^','*'][param_grid['metric'].index(metric)],
                      markersize=4)
 
         plt.xlim([0, 20])
